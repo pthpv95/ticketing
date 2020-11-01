@@ -8,9 +8,13 @@ metadata:
 spec:
   rules:
     - host: ticketing.test
-      http: 
+      http:
         paths:
-          - path: '/api/users/?(.*)'
+          - path: /api/users/?(.*)
             backend:
               serviceName: auth-srv
+              servicePort: 3000
+          - path: /?(.*)
+            backend:
+              serviceName: client-srv
               servicePort: 3000
