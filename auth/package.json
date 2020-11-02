@@ -10,12 +10,15 @@
   "jest": {
     "preset": "ts-jest",
     "testEnvironment": "node",
-    "setupFilesAfterEnv": ["./src/test/setup.ts"]
+    "setupFilesAfterEnv": [
+      "./src/test/setup.ts"
+    ]
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@hptickets/common": "^1.0.5",
     "@types/cookie-session": "^2.0.41",
     "@types/jsonwebtoken": "^8.5.0",
     "@types/mongoose": "^5.7.36",

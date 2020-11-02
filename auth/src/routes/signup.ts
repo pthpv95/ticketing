@@ -1,9 +1,8 @@
 import express, { Request, Response } from "express"
 import jwt from "jsonwebtoken"
 import { body } from "express-validator"
-import { BadRequestError } from "../errors/bad-request-error"
 import { User } from "../models/user"
-import { validateRequest } from "../middlewares/validate-request"
+import { validateRequest, BadRequestError } from "@hptickets/common"
 
 const router = express.Router()
 
