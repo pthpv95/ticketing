@@ -1,6 +1,7 @@
 import request from "supertest"
 import { app } from "../../app"
 import { generateObjectId } from "../../helpers/generate-objectId"
+import { natsWrapper } from "../../nats-wrapper"
 
 it("return a 404 if the provided does not exist", async () => {
   const id = generateObjectId()
@@ -54,7 +55,25 @@ it("return a 201 if ticket is updated successfully", async () => {
     .send({ title: "title updated", price: 500 })
     .expect(200)
 
-  const getTicketRes = await request(app).get(`/api/tickets/${response.body.id}`).send()
+  const getTicketRes = await request(app)
+    .get(`/api/tickets/${response.body.id}`)
+    .send()
   expect(getTicketRes.body.title).toEqual("title updated")
   expect(getTicketRes.body.price).toEqual(500)
+})
+
+it("publishes an event after update ticket successful", async () => {
+  const cookie = global.signin()
+  const response = await request(app)
+    .post("/api/tickets")
+    .set("Cookie", cookie)
+    .send({ title: "title", price: 100 })
+
+  await request(app)
+    .put(`/api/tickets/${response.body.id}`)
+    .set("Cookie", cookie)
+    .send({ title: "title updated", price: 500 })
+    .expect(200)
+
+  expect(natsWrapper.client.publish).toHaveBeenCalled()
 })
