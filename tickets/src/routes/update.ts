@@ -2,6 +2,7 @@ import express, { Request, Response } from "express"
 import { body } from "express-validator"
 import {
   authorized,
+  BadRequestError,
   NotFoundError,
   UnauthorizedError,
   validateRequest,
@@ -27,6 +28,10 @@ router.put(
     const ticket = await Ticket.findById({ _id: req.params.id })
     if (!ticket) {
       throw new NotFoundError()
+    }
+
+    if (ticket.orderId) {
+      throw new BadRequestError("Ticket has been reserved.")
     }
 
     if (ticket.userId !== req.currentUser!.id) {
