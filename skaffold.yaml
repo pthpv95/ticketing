@@ -16,14 +16,14 @@ build:
         manual:
           - src: 'src/**/.ts'
             dest: .
-    - image: hienpham95/client
-      context: client
-      docker:
-        dockerfile: Dockerfile
-      sync:
-        manual:
-          - src: '**/*.js'
-            dest: .
+    # - image: hienpham95/client
+    #   context: client
+    #   docker:
+    #     dockerfile: Dockerfile
+    #   sync:
+    #     manual:
+    #       - src: '**/*.js'
+    #         dest: .
     - image: hienpham95/tickets
       context: tickets
       docker:
@@ -34,6 +34,22 @@ build:
             dest: .
     - image: hienpham95/orders
       context: orders
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: 'src/**/.ts'
+            dest: .
+    - image: hienpham95/expiration
+      context: expiration
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: 'src/**/.ts'
+            dest: .
+    - image: hienpham95/payment
+      context: payment
       docker:
         dockerfile: Dockerfile
       sync:
