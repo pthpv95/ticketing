@@ -1,7 +1,8 @@
 import { MongoMemoryServer } from "mongodb-memory-server"
 import mongoose from "mongoose"
 import jwt from "jsonwebtoken"
-import { generateObjectId } from "../helpers/generate-objectId"
+
+const generateObjectId = () => new mongoose.Types.ObjectId().toHexString()
 
 declare global {
   namespace NodeJS {

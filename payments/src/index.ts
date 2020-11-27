@@ -1,6 +1,8 @@
 import { app } from "./app"
 import mongoose from "mongoose"
 import { natsWrapper } from "./nats-wrapper"
+import { OrderCreatedListener } from "./events/listeners/order-created-listener"
+import { OrderCancelledListener } from "./events/listeners/order-cancelled-listener"
 
 const start = async () => {
   if (!process.env.JWT_KEY) {
@@ -28,6 +30,9 @@ const start = async () => {
       process.env.NATS_CLIENT_ID!,
       process.env.NATS_URL!
     )
+
+    new OrderCreatedListener(natsWrapper.client).listen()
+    new OrderCancelledListener(natsWrapper.client).listen()
 
     natsWrapper.client.on("close", () => {
       console.log("NATs connection closed")
