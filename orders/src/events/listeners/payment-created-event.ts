@@ -21,12 +21,11 @@ export class PaymentCreatedListener extends Listener<PaymentCreatedEvent> {
     }
 
     order.set({
-      staus: OrderStatus.Completed,
+      status: OrderStatus.Completed,
     })
     await order.save()
 
     // ideally emit event order updated
-
     msg.ack()
   }
 }
