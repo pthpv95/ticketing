@@ -1,5 +1,5 @@
 
-name: deploy-manifests-v2
+name: deploy-manifests
 
 on:
   push:
