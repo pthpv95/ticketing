@@ -7,7 +7,7 @@ const apiClient = ({ req }) => {
   if (typeof window === "undefined") {
     return axios.create({
       baseURL:
-        "http://ingress-nginx-controller.ingress-nginx.svc.cluster.local",
+        "http://hienpham.fun",
       headers: req.headers,
     })
   } else {
