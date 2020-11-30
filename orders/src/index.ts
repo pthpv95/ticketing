@@ -7,7 +7,7 @@ import { ExpirationCompleteListener } from "./events/listeners/expiration-comple
 import { PaymentCreatedListener } from "./events/listeners/payment-created-event"
 
 const start = async () => {
-  console.log('add start up message');
+  console.log("Hello word from digital ocean")
   if (!process.env.JWT_KEY) {
     throw new Error("JWT_KEY must be defined")
   }
