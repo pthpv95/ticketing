@@ -6,8 +6,7 @@ import axios from "axios"
 const apiClient = ({ req }) => {
   if (typeof window === "undefined") {
     return axios.create({
-      baseURL:
-        "http://hienpham.fun",
+      baseURL: process.env.BASE_API_URL,
       headers: req.headers,
     })
   } else {
