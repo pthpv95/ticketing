@@ -4,8 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "ts-node-dev src/index.ts",
-    "test": "jest --watchAll --no-cache"
+    "start:dev": "ts-node-dev src/index.ts",
+    "start": "node build/index.js",
+    "test": "jest --watchAll --no-cache",
+    "test:ci": "jest",
+    "build": "rimraf ./build && tsc"
   },
   "jest": {
     "preset": "ts-jest",
@@ -23,7 +26,8 @@
     "bull": "^3.19.1",
     "node-nats-streaming": "^0.3.2",
     "ts-node-dev": "^1.0.0-pre.65",
-    "typescript": "^4.0.3"
+    "typescript": "^4.0.3",
+    "rimraf": "3.0.2"
   },
   "devDependencies": {
     "@types/jest": "^26.0.15",
